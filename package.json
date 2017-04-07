@@ -1,0 +1,20 @@
+{
+  "name": "react-yoga-poc",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "animar": "^0.8.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "yoga-layout": "^1.2.0"
+  },
+  "devDependencies": {
+    "react-scripts": "0.9.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
