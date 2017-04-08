@@ -8,6 +8,7 @@
     "react-dom": "^15.4.2",
     "yoga-layout": "^1.2.0"
   },
+  "homepage": "http://vincentriemer.com/react-dom-yoga-poc",
   "devDependencies": {
     "autoprefixer": "6.7.2",
     "babel-core": "6.22.1",

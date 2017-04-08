@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/";
+/******/ 	__webpack_require__.p = "/react-dom-yoga-poc/";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -4392,7 +4392,7 @@
 	        [root, 'build', 'default', name],
 	        [
 	            root,
-	            ({"NODE_ENV":"production","PUBLIC_URL":""})['NODE_BINDINGS_COMPILED_DIR'] || 'compiled',
+	            ({"NODE_ENV":"production","PUBLIC_URL":"/react-dom-yoga-poc"})['NODE_BINDINGS_COMPILED_DIR'] || 'compiled',
 	            process.versions.node,
 	            process.platform,
 	            process.arch,
@@ -19889,7 +19889,7 @@
 	
 	var ReactComponentTreeHook;
 	
-	if (typeof process !== 'undefined' && ({"NODE_ENV":"production","PUBLIC_URL":""}) && ("production") === 'test') {
+	if (typeof process !== 'undefined' && ({"NODE_ENV":"production","PUBLIC_URL":"/react-dom-yoga-poc"}) && ("production") === 'test') {
 	  // Temporary hack.
 	  // Inline requires don't work well with Jest:
 	  // https://github.com/facebook/react/issues/7240
@@ -26338,7 +26338,7 @@
 	
 	var ReactComponentTreeHook;
 	
-	if (typeof process !== 'undefined' && ({"NODE_ENV":"production","PUBLIC_URL":""}) && ("production") === 'test') {
+	if (typeof process !== 'undefined' && ({"NODE_ENV":"production","PUBLIC_URL":"/react-dom-yoga-poc"}) && ("production") === 'test') {
 	  // Temporary hack.
 	  // Inline requires don't work well with Jest:
 	  // https://github.com/facebook/react/issues/7240
@@ -29021,4 +29021,4 @@
 
 /***/ }
 /******/ ])));
-//# sourceMappingURL=main.9b4fb41f.js.map
+//# sourceMappingURL=main.ef8f80b9.js.map
