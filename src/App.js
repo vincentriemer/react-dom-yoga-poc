@@ -4,7 +4,7 @@ import Animar from "animar";
 
 // event batching/throttling
 (() => {
-  var throttle = function(type, name, method, obj) {
+  var throttle = function(type, name, obj) {
     obj = obj || window;
     var running = false;
     var func = function() {
@@ -12,28 +12,17 @@ import Animar from "animar";
         return;
       }
       running = true;
-
-      if (method === "raf") {
-        requestAnimationFrame(function() {
-          obj.dispatchEvent(new CustomEvent(name));
-          running = false;
-        });
-      } else {
-        window.setTimeout(
-          function() {
-            obj.dispatchEvent(new CustomEvent(name));
-            running = false;
-          },
-          250
-        );
-      }
+      requestAnimationFrame(function() {
+        obj.dispatchEvent(new CustomEvent(name));
+        running = false;
+      });
     };
     obj.addEventListener(type, func);
   };
 
-  throttle("resize", "optimizedResize", "raf");
+  throttle("resize", "optimizedResize");
   throttle("dirty-layout", "optimizedDirtyLayout");
-  throttle("update-layout", "optimizedUpdateLayout", "raf");
+  throttle("update-layout", "optimizedUpdateLayout");
 })();
 
 var animar = new Animar({
@@ -117,7 +106,7 @@ class View extends BaseComponent {
   }
 
   componentDidMount() {
-    window.addEventListener("update-layout", this.handleLayout, false);
+    window.addEventListener("optimizedUpdateLayout", this.handleLayout, false);
     this.updatePosition(this.state.layout, this.state.layout);
   }
 
@@ -218,12 +207,7 @@ class RootView extends BaseComponent {
 
     this.dirtyEvent = new Event("dirty-layout");
     this.layoutEvent = new Event("update-layout");
-    this.bindClassFunctions(
-      "initializeNode",
-      "handleDirty",
-      "handleResize",
-      "handleLayout"
-    );
+    this.bindClassFunctions("initializeNode", "handleDirty", "handleResize");
 
     this.initializeNode();
   }
@@ -245,12 +229,6 @@ class RootView extends BaseComponent {
     window.dispatchEvent(this.dirtyEvent);
   }
 
-  handleLayout() {
-    this.setState({
-      layout: this.node.getComputedLayout(),
-    });
-  }
-
   componentDidMount() {
     window.addEventListener("optimizedUpdateLayout", this.handleLayout, false);
     window.addEventListener("optimizedDirtyLayout", this.handleDirty, false);
@@ -264,23 +242,11 @@ class RootView extends BaseComponent {
 
   render() {
     const { layout, childNode } = this.state;
-    const { style, children } = this.props;
+    const { children } = this.props;
 
-    const resolvedStyle = {
-      ...style,
-      position: "fixed",
-      top: 0,
-      left: 0,
-      width: layout.width,
-      height: layout.height,
-      transform: `translateX(${layout.left}px) translateY(${layout.top}px)`,
-    };
-
-    return (
-      <div style={resolvedStyle}>
-        {React.cloneElement(React.Children.only(children), { node: childNode })}
-      </div>
-    );
+    return React.cloneElement(React.Children.only(children), {
+      node: childNode,
+    });
   }
 }
 
